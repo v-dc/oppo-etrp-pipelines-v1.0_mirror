@@ -1,0 +1,148 @@
+project: CB-Core Credit Bureau Template
+version: 1.0.0
+updated: 2025-06-26
+
+description: |
+  Production-ready credit bureau data platform template for rapid client deployment.
+  Processes 19,975 historical files (1999-2024) and ongoing monthly data feeds.
+
+tech_stack:
+  orchestration:
+    tool: Apache Airflow
+    version: 3.0
+    location: /opt/airflow/
+    services:
+      - airflow-scheduler
+      - airflow-dag-processor  
+      - airflow-triggerer
+      - airflow-api-server
+    restart_command: |
+      sudo systemctl restart airflow-scheduler
+      sudo systemctl restart airflow-dag-processor
+      sudo systemctl restart airflow-triggerer
+      sudo systemctl restart airflow-api-server
+    config_approach: manual_dag_bundle_setup
+  processing:
+    tool: Apache Spark
+    version: 3.5.6
+    optimization: single-node NPD server
+  storage_iceberg:
+    tool: Apache Iceberg
+    catalog: JDBC
+    warehouse: /data2/systems/data/jdbc_warehouse/
+    database: jdbc_catalog_db
+  storage_operational:
+    tool: PostgreSQL
+    version: 16
+    database: boards
+    purpose: analytics and operational queries
+  quality:
+    tool: Great Expectations
+    integration: embedded in Spark jobs
+
+environment:
+  server: NPD Server (Dell PowerEdge T150)
+  cpu: Intel Xeon E-2378 (8 cores/16 threads)
+  memory: 32GB ECC
+  storage: 960GB SSD + 2x2TB HDD
+  network: 192.168.0.74
+  python_venv: /data1/systems/cb-system/venvs-cb/cb3.12
+  approach: BashOperator with explicit activation
+
+spark_profiles:
+  development: 
+    purpose: "Minimal resource allocation for development and testing"
+    resources: "3/8 cores, 6/32GB memory"
+    config: "cb_core_development.conf"
+  base:
+    purpose: "Default configuration for general CB-Core applications"
+    resources: "7/8 cores, 20/32GB memory"
+    config: "cb_core_base.conf"
+  iceberg:
+    purpose: "Base configuration with Iceberg catalog settings"
+    resources: "7/8 cores, 20/32GB memory + Iceberg optimizations"
+    config: "cb_core_iceberg.conf"
+  historical:
+    purpose: "Maximum resource allocation for batch historical processing"
+    resources: "7/8 cores, 26/32GB memory"
+    config: "cb_core_historical.conf"
+  live:
+    purpose: "Optimized for real-time, low-latency processing"
+    resources: "7/8 cores, 20/32GB memory with latency optimizations"
+    config: "cb_core_live.conf"
+
+data_paths:
+  raw_historical: "/data1/systems/cb-system/data/raw/"
+  raw_incoming: "/data1/systems/cb-system/data/raw-incoming/"
+  processed: "/data1/systems/cb-system/data/processed/"
+  processed_historical: "/data1/systems/cb-system/data/processed/historical/"
+  processed_live: "/data1/systems/cb-system/data/processed/live/"
+  quarantine: "/data1/systems/cb-system/data/processed/quarantine/"
+  reference_data: "/data1/systems/cb-system/data/raw-dictionary/"
+  warehouse: "/data2/systems/data/jdbc_warehouse/"
+
+database_connections:
+  iceberg_catalog:
+    host: "localhost:5432"
+    database: "jdbc_catalog_db"
+    user: "jdbc_user"
+    password: "jdbc_password"
+    purpose: "Iceberg table metadata and catalog management"
+  operational:
+    host: "192.168.0.74:5432"
+    database: "boards"
+    user: "spark_user"
+    password: "spark_password"
+    purpose: "Clean operational data for analytics and reporting"
+
+data_sources:
+  historical:
+    location: /data1/systems/cb-system/data/raw/
+    files: 19975
+    period: 1999-02-2024-12
+    institutions: 123 across 5 types (BK/MG/LN/FS/OT)
+    filename_pattern: "{PROVIDER}_{PERIOD}_{DATE}_{TIME}_{SECONDS}.txt"
+    example: "BK00001_199902_19990325_0930_20.txt"
+  live:
+    location: /data1/systems/cb-system/data/raw-incoming/
+    frequency: daily
+    volume: ~50 files per month
+  metadata:
+    location: /data1/systems/cb-system/data/raw-dictionary/
+    files:
+      - dictionary_fields_final.csv (field definitions and data dictionary)
+      - institution_final.csv (provider code to institution name lookup)
+      - raw-filename-parse.txt (filename format specification)
+    purpose: Reference data for processing and validation
+    note: Read-only access, copied to docs/dictionaries/ for development
+
+constraints:
+  spark:
+    max_executors: 2
+    executor_cores: 3
+    executor_memory: 8GB
+    driver_memory: 4GB
+  airflow:
+    exclusive_processing: live OR historical, never both
+  
+modules:
+  discovery:
+    status: completed
+    file: src/discovery/historical_file_discovery.py
+    purpose: File discovery and metadata extraction
+    table: jdbc_prod.default.cb_file_metadata
+    dag: cb_historical_file_discovery
+    runtime: ~35 minutes for full dataset
+  ingestion:
+    status: planned
+  transformation:
+    status: planned
+  quality:
+    status: planned
+
+patterns:
+  dag_structure: exclusive-mode-operation
+  error_handling: fail-fast-with-recovery
+  logging: structured-json-correlation-id
+  data_quality: staging-first-with-corrections
+  system_integration: manual_configuration_required

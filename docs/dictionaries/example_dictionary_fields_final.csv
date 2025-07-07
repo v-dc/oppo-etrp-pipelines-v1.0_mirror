@@ -1,0 +1,64 @@
+Field Name,Type,Length,Source
+fico,Numeric,4,orig
+dt_first_pi,Date,6,orig
+flag_fthb,Alpha,1,orig
+dt_matr,Date,6,orig
+cd_msa,Numeric,5,orig
+mi_pct,Numeric,3,orig
+cnt_units,Numeric,2,orig
+occpy_sts,Alpha,1,orig
+cltv,Numeric,3,orig
+dti,Numeric,3,orig
+orig_upb,Numeric,12,orig
+ltv,Numeric,3,orig
+orig_int_rt,"Numeric - 6,3",6,orig
+channel,Alpha,1,orig
+ppmt_pnlty,Alpha,1,orig
+amrtzn_type,Alpha,5,orig
+st,Alpha,2,orig
+prop_type,Alpha,2,orig
+zipcode,Numeric,5,orig
+loan_purpose,Alpha,1,orig
+orig_loan_term,Numeric,3,orig
+cnt_borr,Numeric,2,orig
+seller_name,Alpha Numeric,60,orig
+servicer_name,Alpha Numeric,60,orig
+flag_sc,Alpha,1,orig
+id_loan_preharp,Alpha Numeric - PYYQnXXXXXXX,12,orig
+ind_afdl,Alpha Numeric,1,orig
+ind_harp,Alpha,1,orig
+cd_ppty_val_type,Numeric,1,orig
+flag_int_only,Alpha,1,orig
+flag_mi_cancel,,1,orig
+id_loan,Alpha,12,svcg
+period,Date,6,svcg
+curr_act_upb,"Numeric - 12,2",12,svcg
+delq_sts,Alpha Numeric,3,svcg
+loan_age,Numeric ,3,svcg
+mths_remng,Numeric ,3,svcg
+defect_settlement_date,Date,6,svcg
+flag_mod,Alpha,1,svcg
+cd_zero_bal,Numeric,2,svcg
+dt_zero_bal,Date,6,svcg
+cur_int_rt,"Numeric - 8,3",8,svcg
+cur_dfrd_upb,Numeric,12,svcg
+dt_lst_pi,Date,6,svcg
+mi_recoveries,"Numeric - 12,2",12,svcg
+net_sale_proceeds,Alpha-Numeric ,14,svcg
+non_mi_recoveries,"Numeric - 12,2",12,svcg
+expenses,"Numeric - 12,2",12,svcg
+legal_costs,"Numeric - 12,2",12,svcg
+maint_pres_costs,"Numeric - 12,2",12,svcg
+taxes_ins_costs,"Numeric - 12,2",12,svcg
+misc_costs,"Numeric - 12,2",12,svcg
+actual_loss,"Numeric - 12,2",12,svcg
+modcost,"Numeric - 12,2",12,svcg
+stepmod_ind,Alpha,1,svcg
+dpm_ind,Alpha,1,svcg
+eltv,Numeric,4,svcg
+zb_removal_upb,"Numeric - 12,2",12,svcg
+dlq_acrd_int,"Numeric - 12,2",12,svcg
+disaster_area_flag,Alpha,1,svcg
+borr_assist_ind,Alpha,1,svcg
+monthly_modcost,"Numeric - 12,2",12,svcg
+amt_int_brng_upb,"Numeric - 12,2",12,svcg

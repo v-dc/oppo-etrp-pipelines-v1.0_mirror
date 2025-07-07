@@ -1,0 +1,68 @@
+flowchart TD
+    %% External Entities
+    CONTRIB[["🏢 BNPL Contributors<br/>(35+ entities)"]]
+    JIRA[["📋 JIRA<br/>Issue Tracking"]]
+    ANALYTICS[["👥 Analytics Team"]]
+    OPS_DASH[["📊 Operations<br/>Dashboard"]]
+    DQ_DASH[["📈 Data Quality<br/>Dashboard"]]
+    TRIGGERS[["⏰ Time/Event<br/>Triggers"]]
+    CLIENTS[["👤 Credit Enquiry<br/>Clients"]]
+
+    %% Processes
+    P1(["1.0<br/>INGEST DATA<br/>Airflow DAGs<br/>Spark Processing"])
+    P2(["2.0<br/>VALIDATE QUALITY<br/>Great Expectations<br/>Framework"])
+    P3(["3.0<br/>LOAD TO<br/>OPERATIONS DB<br/>PostgreSQL Loading"])
+    P4(["4.0<br/>HANDLE<br/>EXCEPTIONS<br/>Airflow Jira Integration"])
+    P5(["5.0<br/>GENERATE<br/>ATTRIBUTES<br/>Attribute Engine<br/>Calculations"])
+    P6(["6.0<br/>REPORTING ENGINE<br/>Credit Report<br/>Generation"])  
+
+    %% Data Stores
+    D1[("D1<br/>Iceberg Data<br/>Warehouse")]
+    D2[("D2<br/>PostgreSQL<br/>Operations DB")]
+    D3[("D3<br/>Quality<br/>Statistics")]
+    D4[("D4<br/>Operations<br/>Metrics")]
+
+    %% Main Data Flow
+    CONTRIB -->|raw_data_files| P1
+    P1 -->|ingested_data| D1
+    P1 -->|processing_request| P2
+    D1 -->|data_for_validation| P2
+    
+    %% Quality Validation Paths
+    P2 -->|validated_data| P3
+    P2 -->|failed_data| P4
+    
+    %% Exception Handling
+    P4 -->|exception_details| JIRA
+    JIRA -->|correction_request| CONTRIB
+    
+    %% Operations Database
+    P3 -->|clean_data| D2
+    
+    %% Attribute Generation
+    TRIGGERS -->|time_event_triggers| P5
+    D2 -->|trigger_request| P5
+    P5 -->|calculated_attributes| D2
+    
+    %% Analytics Access
+    D2 -->|analytics_copy| ANALYTICS
+    
+    %% Credit Reporting
+    CLIENTS -->|credit_enquiry| P6
+    D2 -->|customer_data| P6
+    P6 -->|credit_reports| CLIENTS
+    
+    %% Monitoring and Dashboards
+    P2 -->|ops_metrics| D3
+    P2 -->|quality_stats| D4
+    D3 -->|operational_reports| OPS_DASH
+    D4 -->|quality_reports| DQ_DASH
+
+    %% Styling
+    classDef externalEntity fill:#e8f4fd,stroke:#1976d2,stroke-width:2px,color:#1976d2
+    classDef process fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#333
+    classDef dataStore fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#333
+    
+    class CONTRIB,JIRA,ANALYTICS,OPS_DASH,DQ_DASH,TRIGGERS,CLIENTS externalEntity
+    class P1,P2,P3,P4,P5,P6 process
+    class D1,D2,D3,D4 dataStore
