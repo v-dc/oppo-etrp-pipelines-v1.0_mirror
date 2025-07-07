@@ -1,0 +1,279 @@
+# PySpark Schema for Draft Dictionary - Raw Data
+# Generated from docs/dictionaries/draft_dictionary.xlsx
+# This schema is for loading pipe-delimited text files with the 'fixed' format
+
+schema_name: draft_schema_raw
+description: Schema for loading raw eTRP data files based on draft dictionary
+file_format: text
+delimiter: "|"
+header: true
+
+fields:
+  - name: payment_code
+    type: string
+    nullable: false
+    description: "Payment Trend Operation Code [A:add, M:modify, D:delete]"
+    valid_values: ["A", "M", "D"]
+    
+  - name: operation_code
+    type: string
+    nullable: false
+    description: "eTR Operation Code [A:add, M:modify, D:delete]"
+    valid_values: ["A", "M", "D"]
+    
+  - name: party_type
+    type: string
+    nullable: false
+    description: "Party Type (I: Individual, C: Company, B: Both)"
+    valid_values: ["I", "C", "B"]
+    
+  - name: name
+    type: string
+    nullable: false
+    description: "Name (mandatory)"
+    
+  - name: company_reg_no
+    type: string
+    nullable: true
+    description: "Old IC No./ Company Reg No."
+    
+  - name: business_reg_no
+    type: string
+    nullable: true
+    description: "New IC No./ Business Reg No."
+    
+  - name: passport
+    type: string
+    nullable: true
+    description: "Passport No."
+    
+  - name: account
+    type: string
+    nullable: false
+    description: "Account No. (mandatory)"
+    
+  - name: account_status
+    type: integer
+    nullable: false
+    description: "Account Status [1:Active, 2:Closed, 3:Dormant, 4:Bad Debt]"
+    valid_values: [1, 2, 3, 4]
+    
+  - name: relationship_start_date
+    type: string
+    nullable: false
+    description: "Relationship Start Date (format: yyyyMMdd)"
+    date_format: "yyyyMMdd"
+    
+  - name: relationship_type
+    type: integer
+    nullable: false
+    description: "Relationship Type [1:Customer, 2:Co-borrower, etc.]"
+    valid_values: [1, 2, 3, 4, 5, 6, 7, 8]
+    
+  - name: agreement_date
+    type: string
+    nullable: false
+    description: "Agreement Date (format: yyyyMMdd)"
+    date_format: "yyyyMMdd"
+    
+  - name: statement_date
+    type: string
+    nullable: true
+    description: "Statement Date (format: yyyyMMdd)"
+    date_format: "yyyyMMdd"
+    
+  - name: capacity
+    type: integer
+    nullable: true
+    description: "Capacity [1:Own 2:Joint Owners]"
+    valid_values: [1, 2]
+    
+  - name: facility
+    type: integer
+    nullable: true
+    description: "Facility [1:Trade Facilities 2:Goods & Services Receivables, etc.]"
+    valid_values: [1, 2, 3, 4, 5, 6]
+    
+  - name: credit_limit
+    type: decimal(18,2)
+    nullable: true
+    description: "Credit Limit [RM]"
+    
+  - name: instalment_amount
+    type: decimal(18,2)
+    nullable: true
+    description: "Instalment Amount"
+    
+  - name: amount_in_arrears
+    type: decimal(18,2)
+    nullable: true
+    description: "Amount In Arrears"
+    
+  - name: month_in_arrears
+    type: integer
+    nullable: true
+    description: "Month In Arrears"
+    
+  - name: tenure
+    type: integer
+    nullable: true
+    description: "Tenure [Days]"
+    
+  - name: total_balance_outstanding
+    type: decimal(18,2)
+    nullable: true
+    description: "Total Balance Outstanding"
+    
+  - name: late_payment_interest
+    type: integer
+    nullable: true
+    description: "Late Payment Interest [%]"
+    
+  - name: principal_repayment_term
+    type: integer
+    nullable: true
+    description: "Principal Repayment Term [1:Monthly 2:Quarterly, etc.]"
+    valid_values: [1, 2, 3, 4, 5]
+    
+  - name: collateral_type
+    type: integer
+    nullable: true
+    description: "Collateral Type"
+    valid_values: [0, 15]
+    
+  - name: legal_status
+    type: integer
+    nullable: true
+    description: "Legal Status [1: Legal Letter Sent 2:Non Performing Loans]"
+    valid_values: [1, 2]
+    
+  - name: date_status_update
+    type: string
+    nullable: true
+    description: "Date Status Update (format: yyyyMMdd)"
+    date_format: "yyyyMMdd"
+    
+  - name: deletion_reason_code
+    type: integer
+    nullable: true
+    description: "Deletion Reason Code [1: Fully Settled, 2:Write Off, etc.]"
+    valid_values: [1, 2, 3, 4, 5, 6, 7]
+    
+  - name: total_amount_paid
+    type: decimal(18,2)
+    nullable: true
+    description: "Total Amount Paid (RM)"
+    
+  - name: debt_type
+    type: string
+    nullable: true
+    description: "Debt Type (3 characters)"
+    max_length: 3
+    
+  - name: email
+    type: string
+    nullable: true
+    description: "Email (optional)"
+    format: "email"
+    
+  - name: mobile_no
+    type: string
+    nullable: true
+    description: "Mobile No. (format: 601x-xxxxxxx)"
+    format: "phone"
+    pattern: "^601[0-9]-[0-9]{7}$"
+    
+  - name: date_of_notice
+    type: string
+    nullable: true
+    description: "Date of Notice/Letter of Demand (format: yyyyMMdd)"
+    date_format: "yyyyMMdd"
+    
+  - name: sponsor_constitution
+    type: string
+    nullable: true
+    description: "Sponsor Constitution [I: Individual, C: Company, B: Both]"
+    valid_values: ["I", "C", "B"]
+    
+  - name: sponsor_old_ic_company_reg_no
+    type: string
+    nullable: true
+    description: "Sponsor Old IC or Company Reg No."
+    
+  - name: sponsor_new_ic_business_reg_no
+    type: string
+    nullable: true
+    description: "Sponsor New IC or Business Reg No."
+    
+  - name: sponsor_passport_no
+    type: string
+    nullable: true
+    description: "Sponsor Passport No."
+    
+  - name: sponsor_name
+    type: string
+    nullable: true
+    description: "Sponsor Name (mandatory if sponsor data inserted)"
+    
+  - name: sponsor_status
+    type: integer
+    nullable: true
+    description: "Sponsor Status (mandatory if sponsor data inserted)"
+    valid_values: [1, 2, 3]
+    
+  - name: sponsor_remarks
+    type: string
+    nullable: true
+    description: "Sponsor Remarks (optional)"
+    
+  - name: old_account_no
+    type: string
+    nullable: true
+    description: "Old Account No. (optional)"
+
+# PySpark schema generation helper
+pyspark_schema_code: |
+  from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DecimalType
+  
+  draft_schema_raw = StructType([
+      StructField("payment_code", StringType(), False),
+      StructField("operation_code", StringType(), False),
+      StructField("party_type", StringType(), False),
+      StructField("name", StringType(), False),
+      StructField("company_reg_no", StringType(), True),
+      StructField("business_reg_no", StringType(), True),
+      StructField("passport", StringType(), True),
+      StructField("account", StringType(), False),
+      StructField("account_status", IntegerType(), False),
+      StructField("relationship_start_date", StringType(), False),
+      StructField("relationship_type", IntegerType(), False),
+      StructField("agreement_date", StringType(), False),
+      StructField("statement_date", StringType(), True),
+      StructField("capacity", IntegerType(), True),
+      StructField("facility", IntegerType(), True),
+      StructField("credit_limit", DecimalType(18, 2), True),
+      StructField("instalment_amount", DecimalType(18, 2), True),
+      StructField("amount_in_arrears", DecimalType(18, 2), True),
+      StructField("month_in_arrears", IntegerType(), True),
+      StructField("tenure", IntegerType(), True),
+      StructField("total_balance_outstanding", DecimalType(18, 2), True),
+      StructField("late_payment_interest", IntegerType(), True),
+      StructField("principal_repayment_term", IntegerType(), True),
+      StructField("collateral_type", IntegerType(), True),
+      StructField("legal_status", IntegerType(), True),
+      StructField("date_status_update", StringType(), True),
+      StructField("deletion_reason_code", IntegerType(), True),
+      StructField("total_amount_paid", DecimalType(18, 2), True),
+      StructField("debt_type", StringType(), True),
+      StructField("email", StringType(), True),
+      StructField("mobile_no", StringType(), True),
+      StructField("date_of_notice", StringType(), True),
+      StructField("sponsor_constitution", StringType(), True),
+      StructField("sponsor_old_ic_company_reg_no", StringType(), True),
+      StructField("sponsor_new_ic_business_reg_no", StringType(), True),
+      StructField("sponsor_passport_no", StringType(), True),
+      StructField("sponsor_name", StringType(), True),
+      StructField("sponsor_status", IntegerType(), True),
+      StructField("sponsor_remarks", StringType(), True),
+      StructField("old_account_no", StringType(), True)
+  ])
