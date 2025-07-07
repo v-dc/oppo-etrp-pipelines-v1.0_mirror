@@ -1,3 +1,87 @@
+# Claude AI
 .claude/
+
+# Virtual Environment
 .venv/
+venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+airflow/logs/
+
+# Data files (but keep sample files)
+*.csv
+*.xlsx
+*.xls
+!docs/dictionaries/*.xlsx
+!docs/dictionaries/*.csv
+!docs/requirements_material/*.xlsx
+!samples/*.txt
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Spark
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Airflow
+airflow.db
+airflow/airflow.db
+airflow/webserver_config.py
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Credentials and secrets
+*credentials*
+*secrets*
+*.pem
+*.key
+*.cert
 
