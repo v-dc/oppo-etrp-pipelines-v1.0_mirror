@@ -1,4 +1,4 @@
-# Project Structure Standard
+# Project Structure Standard v2.0
 
 ## Purpose
 Standard template for creating new projects using the agentic development framework.
@@ -11,8 +11,9 @@ Framework governance documents maintained separately from projects.
 ### Phase 1: Discovery & Requirements  
 Business requirements analysis, technical assessment, data profiling.
 
-### Phase 2: Solution Design
-Architecture design, data modeling, security planning.
+### Phase 2: Solution Design (Two-Step Process)
+**Step 2A:** Module decomposition optimized for agentic development  
+**Step 2B:** Complete architecture design, data modeling, security planning.
 
 ### Phase 3: Development Environment Setup
 Project structure creation, configuration, and initial context.
@@ -31,10 +32,12 @@ project-root/
 │   │   ├── technical_assessment.md   # [Phase 1] Infrastructure and technical evaluation
 │   │   └── data_discovery.md         # [Phase 1] Data profiling and source analysis
 │   ├── design/                       # System design documents
-│   │   ├── architecture.md           # [Phase 2] System components and technology stack
-│   │   ├── data_flows.md             # [Phase 2] Data processing flows and diagrams
-│   │   ├── design_decisions.md        # [Phase 2] Architecture Decision Records
-│   │   └── implementation_plan.md     # [Phase 2] Complete system modules and implementation steps
+│   │   ├── module_structure.yaml     # [Phase 2A] Module decomposition for agentic development
+│   │   ├── architecture_rationale.md # [Phase 2A] Justification for module design decisions
+│   │   ├── architecture.md           # [Phase 2B] System components and technology stack
+│   │   ├── data_flows.md             # [Phase 2B] Data processing flows and diagrams
+│   │   ├── design_decisions.md       # [Phase 2B] Architecture Decision Records
+│   │   └── implementation_plan.md    # [Phase 2B] Complete system modules and implementation steps
 │   ├── context/                      # Project context
 │   │   ├── system_context.yaml       # [Phase 3] Machine-readable config
 │   │   ├── data_context.md           # [Phase 3] Data specifications
@@ -75,7 +78,13 @@ project-root/
 - `requirements/technical_assessment.md` - Infrastructure and technical evaluation  
 - `requirements/data_discovery.md` - Data profiling and source analysis
 
-### Phase 2 Completion:
+### Phase 2 Completion (Two-Step Process):
+
+#### Step 2A: Solution Decomposition
+- `design/module_structure.yaml` - Module decomposition optimized for agentic development
+- `design/architecture_rationale.md` - Justification for module design decisions
+
+#### Step 2B: Complete Architecture Design
 - `design/architecture.md` - Complete system design
 - `design/data_flows.md` - All data processing flows documented  
 - `design/design_decisions.md` - Key architectural decisions recorded
@@ -121,6 +130,28 @@ The framework includes `meta/revised_prompt_strategy.md` which provides:
 5. **TECHNICAL SPECIFICATIONS** - Implementation details
 6. **CONSTRAINTS & STANDARDS** - Boundaries and quality requirements
 
+### Phase 2 Two-Step Process:
+
+#### Step 2A: Solution Decomposition Pattern
+```bash
+claude "TASK: Design module decomposition for [project_name] optimized for agentic code generation.
+SUCCESS CRITERIA: Optimal module structure for Claude Code development
+CONTEXT FILES: Phase 1 requirements, project-specific data sources
+TECHNICAL SPECIFICATIONS: Decomposition methodology for 200-400 line modules
+DELIVERABLES: design/module_structure.yaml, design/architecture_rationale.md
+CONSTRAINTS: Agentic development optimization"
+```
+
+#### Step 2B: Complete Architecture Design Pattern
+```bash
+claude "TASK: Design comprehensive solution architecture for [project_name] based on module decomposition.
+CONTEXT FILES: design/module_structure.yaml, design/architecture_rationale.md, Phase 1 requirements
+SUCCESS CRITERIA: Complete system design ready for implementation
+TECHNICAL SPECIFICATIONS: Architecture patterns, technology decisions
+DELIVERABLES: design/architecture.md, design/data_flows.md, design/design_decisions.md, design/implementation_plan.md
+CONSTRAINTS: Align with approved module decomposition"
+```
+
 ### Standard Module Prompt Pattern:
 ```bash
 claude-code "Create [module] as defined in agent-prompts/tasks/[module]/[task].md. 
@@ -133,9 +164,7 @@ Follow patterns from standards/development_patterns.md and use context/system_co
 - `context/data_context.md` - Data specifications and processing requirements
 - `design/architecture.md` - System architecture and integration points
 - `design/data_flows.md` - Processing pipeline patterns
-
-## Framework Template Location
-Maintain latest framework template with all Phase 0 meta documents for copying to new projects.
+- `design/module_structure.yaml` - Approved module boundaries
 
 ## Project Initialization Checklist
 
@@ -144,7 +173,13 @@ Maintain latest framework template with all Phase 0 meta documents for copying t
 - [ ] `requirements/technical_assessment.md` - Infrastructure and technical evaluation
 - [ ] `requirements/data_discovery.md` - Data profiling and source analysis
 
-### Phase 2 Complete:
+### Phase 2 Complete (Two-Step Process):
+
+#### Step 2A Complete:
+- [ ] `design/module_structure.yaml` - Module decomposition optimized for agentic development
+- [ ] `design/architecture_rationale.md` - Justification for module design decisions
+
+#### Step 2B Complete:
 - [ ] `design/architecture.md` - Complete system design
 - [ ] `design/data_flows.md` - All data processing flows documented  
 - [ ] `design/design_decisions.md` - Key architectural decisions recorded
@@ -163,6 +198,7 @@ Maintain latest framework template with all Phase 0 meta documents for copying t
 ### Ready for Phase 4:
 - [ ] All required files in place
 - [ ] Framework governance available
+- [ ] Module decomposition validated and approved
 - [ ] First module task specification ready
 - [ ] Development environment prepared
 
@@ -170,11 +206,21 @@ Maintain latest framework template with all Phase 0 meta documents for copying t
 
 ### For New Projects:
 1. Complete Phases 1-3 before any Claude Code engagement
-2. Use prompt strategy guidelines for task creation
-3. Copy latest framework documents for current best practices
-4. Customize system_context.yaml and data_context.md for project specifics
+2. Execute Phase 2 as two-step process: decomposition first, then complete architecture
+3. Use prompt strategy guidelines for task creation
+4. Copy latest framework documents for current best practices
+5. Customize system_context.yaml and data_context.md for project specifics
 
 ### For Framework Evolution:
 - Update meta documents in Phase 0 template
 - Maintain backward compatibility for existing projects
 - Version framework template for stable project creation
+
+### Phase 2 Two-Step Benefits:
+- **Cognitive Load Management**: Separates module thinking from implementation details
+- **Context File Creation**: Creates module_structure.yaml for use in subsequent design steps
+- **Framework Integration**: Enables validation of module boundaries before detailed design
+- **Agentic Optimization**: Ensures modules are sized optimally for Claude Code generation (200-400 lines)
+
+## Framework Template Location
+Maintain latest framework template with all Phase 0 meta documents for copying to new projects.

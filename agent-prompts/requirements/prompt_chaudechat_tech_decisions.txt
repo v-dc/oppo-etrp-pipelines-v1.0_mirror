@@ -1,0 +1,70 @@
+Architectural Decision Analysis Prompt for CTOS eTR+ Phase 2 Design
+TASK
+
+Analyze the Phase 1 requirements documents and AWS context materials to identify and document critical architectural decisions for the CTOS eTR+ platform rebuild. Create a concise architectural decisions document that ranks decisions by importance and provides clear recommendations with rationale.
+DELIVERABLES
+
+Create requirements/architectural_decisions.md containing:
+
+    Decision Ranking: Major technology choices ranked by importance/impact
+    Decision Summary: For each decision - options, recommendation, rationale
+    Key Trade-offs: Critical benefits/limitations of recommended choices
+    Implementation Impact: Cost and timeline implications
+
+SUCCESS CRITERIA
+
+    All major technology decisions identified and ranked by importance
+    Clear recommendation with concise rationale for each decision
+    Trade-offs explicitly stated for critical decisions
+    Cost implications noted where significant
+    Document is concise and actionable for decision makers
+
+CONTEXT FILES
+
+Review and analyze the Phase 1 requirements:
+
+    requirements/business_requirements.md - Business objectives, success criteria, regulatory requirements
+    requirements/technical_assessment.md - Current state analysis, capacity requirements, constraints
+    requirements/data_discovery.md - Data characteristics, quality requirements, processing needs
+
+And AWS technology context materials:
+
+    airflow_mwaa_architecture.md - Managed vs self-hosted Airflow considerations
+    airflow_self_managed_options.md - Self-managed Airflow deployment patterns
+    aws_cost_control_for_etl.md - Cost optimization strategies for data pipelines
+    aws_data_pipeline_reference_arch.md - Reference architecture patterns and best practices
+    aws_glue_catalog_and_jobs.md - Glue capabilities, limitations, and use cases
+    iceberg_on_s3_glue_long_version.md - Iceberg implementation details and considerations
+    aws_malaysia_services.md - Service availability and constraints in Malaysia region
+    aws_security_and_data_governance.md - Security patterns and compliance frameworks
+    postgres_on_aws_options.md - PostgreSQL deployment options and trade-offs
+    s3_best_practices_data_lake.md - S3 optimization strategies for data lakes
+    aws_well_architected_context.md - Well-Architected framework principles
+    spark_aws_deployment_options_corrected.md - Spark deployment patterns and performance considerations
+
+TECHNICAL SPECIFICATIONS
+
+Identify and rank decisions by impact on:
+
+    Meeting 5x volume growth requirements
+    CCA 2025 compliance timeline
+    Cost optimization
+    Operational complexity
+
+CONSTRAINTS & STANDARDS
+
+Keep recommendations focused on:
+
+    Malaysia region service availability and compliance
+    Zero data loss tolerance during migration
+    Team skillset and learning curve considerations
+    Budget optimization for long-term operations
+
+OUTPUT FORMAT
+
+Structure requirements/architectural_decisions.md as a concise decision summary:
+
+    Rank decisions 1-6 by importance
+    For each decision: Options → Recommendation → Rationale → Trade-offs
+    Keep total document under 2000 words
+    Focus on actionable information for decision makers

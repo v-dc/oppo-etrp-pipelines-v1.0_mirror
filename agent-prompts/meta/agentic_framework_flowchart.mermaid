@@ -1,0 +1,24 @@
+flowchart TD
+    %% Phase 0
+    P0["Phase 0: Framework Design<br/>Human<br/>Creates: meta/ governance files"] --> P1
+
+    %% Phase 1  
+    P1["Phase 1: Discovery & Requirements<br/>Human + Claude Chat<br/>Input: Project charter<br/>Creates: requirements/*.md"] --> P2A
+
+    %% Phase 2A
+    P2A["Phase 2A: Solution Decomposition<br/>Claude Chat<br/>Input: requirements/, meta/<br/>Creates: module_structure.yaml, architecture_rationale.md"] --> P2B
+
+    %% Phase 2B
+    P2B["Phase 2B: Complete Architecture Design<br/>Claude Chat<br/>Input: Phase 2A outputs + requirements/<br/>Creates: architecture.md, data_flows.md, design_decisions.md"] --> P3
+
+    %% Phase 3
+    P3["Phase 3: Development Environment Setup<br/>Human + Claude Code<br/>Input: All design/ files + meta/<br/>Creates: context/, examples/, standards/, configs/"] --> P4
+
+    %% Phase 4
+    P4["Phase 4: Iterative Development<br/>Human + Claude Code + Claude Chat<br/>Input: All context files<br/>Creates: src/, tests/, scripts/, progress/"]
+
+    %% Iterative loop
+    P4 -.->|Next Module| P4
+
+    %% Styling
+    classDef default fill:#ffffff,stroke:#333333,stroke-width:2px,color:#000000
